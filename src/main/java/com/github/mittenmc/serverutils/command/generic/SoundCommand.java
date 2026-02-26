@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class SoundCommand extends SubCommand {
 
-    private final List<String> soundArgs = Arrays.stream(Sound.values()).map(Enum::name).toList();
+    // Paper 1.21: Sound is no longer an enum; avoid Enum::name here.
+    private final List<String> soundArgs = Collections.emptyList();
 
     public SoundCommand(CommandManager commandManager) {
         setName("sound");
@@ -80,8 +80,7 @@ public class SoundCommand extends SubCommand {
     public List<String> getSubcommandArguments(CommandSender sender, String[] args) {
         if (args.length == 2) {
             return null;
-        }
-        else if (args.length == 3) {
+        } else if (args.length == 3) {
             List<String> arr = new ArrayList<>();
             StringUtil.copyPartialMatches(args[2], soundArgs, arr);
             return arr;
